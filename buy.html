@@ -3,80 +3,76 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Buy TORE – Early alpha</title>
-<meta name="description" content="TORE early alpha: a £20 lifetime licence with every future update included.">
+<title>TORE – Availability</title>
+<meta name="description" content="TORE is in pre-alpha and not yet available to buy. Get notified when it is.">
+<meta property="og:title" content="TORE – Availability">
+<meta property="og:description" content="TORE is in pre-alpha and not yet available to buy. Get notified when it is.">
+<meta property="og:url" content="https://toreaudio.com/buy">
+<meta property="og:type" content="website">
 <meta name="theme-color" content="#11151b">
 <link rel="canonical" href="https://toreaudio.com/buy">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-<link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;family=IBM+Plex+Mono:wght@500;600&amp;display=swap">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&amp;family=IBM+Plex+Mono:wght@500;600&amp;display=swap">
 <style>
 *{box-sizing:border-box}
-body{margin:0;background:#11151b;color:#eef1f6;font-family:Inter,'Helvetica Neue',sans-serif;-webkit-font-smoothing:antialiased}
+body{margin:0;background:#11151b}
 a{color:#eef1f6;text-decoration:none}a:hover{color:#ffffff}
-.wrap{max-width:1200px;margin:0 auto;padding:0 32px}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:0 20px;font:600 13px/1 Inter,sans-serif;letter-spacing:.06em;text-transform:uppercase;color:#eef1f6;background:#1d252f;border:1px solid rgba(255,255,255,.22);border-radius:4px;box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 2px 0 rgba(0,0,0,.35);white-space:nowrap;cursor:pointer}
-.btn:hover{background:#232c39;color:#fff}
+.site{--gutter:2rem;--top:5rem;--sec:7rem;--block:1.75rem;--pad-lg:2.5rem;font-size:1rem;line-height:1.6;font-optical-sizing:auto;-webkit-font-smoothing:antialiased}
+.wrap{max-width:70rem;margin:0 auto;padding-left:var(--gutter);padding-right:var(--gutter)}
+:where(a,button):focus-visible{outline:2px solid #3d8bff;outline-offset:3px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;min-height:2.75rem;padding:0 1.25rem;font:600 .8125rem/1 Inter,sans-serif;letter-spacing:.06em;text-transform:uppercase;color:#eef1f6;background:#1d252f;border:1px solid rgba(255,255,255,.22);border-radius:4px;box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 2px 0 rgba(0,0,0,.35);white-space:nowrap;cursor:pointer;transition:background-color 150ms ease-out,transform 100ms ease-out}
+.btn:hover{background:#26303d;color:#fff}
+.btn:active{transform:scale(.97)}
 .btn.pri{background:#3d8bff;border-color:#3d8bff;color:#fff}
-.btn.pri:hover{background:#5a9dff}
-.btn.full{width:100%;min-height:58px;font-size:16px}
+.btn.pri:hover{background:#5a9dff;border-color:#5a9dff}
+.btn.lg{min-height:3.25rem;padding:0 1.75rem;font-size:.875rem}
 .unit{background:#181e26;border:1px solid rgba(255,255,255,.12);border-radius:8px;overflow:hidden}
-.tick{display:flex;gap:12px;font:400 15px/1.5 Inter,sans-serif;color:#c4ccd8}
-.tick svg{flex:none;margin-top:3px}
-.how{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
-.how div{display:flex;flex-direction:column;gap:6px;font:400 14px/1.55 Inter,sans-serif;color:#c4ccd8}
-.how b{font:800 13px/1 'IBM Plex Mono',monospace;color:#3d8bff}
-.how strong{font:700 15px/1.3 Inter,sans-serif;color:#eef1f6}
-.soon{display:inline-flex;align-self:flex-start;align-items:center;gap:8px;font:600 11px/1 Inter,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:#09A3F6}
-.soon i{width:7px;height:7px;border-radius:50%;background:#09A3F6}
-@media (max-width:700px){.how{grid-template-columns:1fr}.card{padding:24px !important}.wrap{padding:0 20px}}
+.card{padding:var(--pad-lg);display:flex;flex-direction:column;gap:1.25rem}
+.soon{display:inline-flex;align-self:flex-start;align-items:center;gap:.5rem;font:600 .6875rem/1 Inter,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:#09A3F6}
+.soon i{width:7px;height:7px;border-radius:50%;background:#09A3F6;display:block}
+.p{margin:0;font-size:1rem;line-height:1.65;color:#c4ccd8}
+.back{display:inline-flex;align-items:center;gap:.375rem;font:600 .8125rem/1 Inter,sans-serif;color:#c4ccd8;padding:.75rem .25rem;transition:color 150ms ease-out}
+.back:hover{color:#fff}
+.foot{display:flex;flex-wrap:wrap;align-items:center;gap:1.5rem;padding-top:2rem;padding-bottom:2rem}
+@media (max-width:860px){.site{--gutter:1.25rem;--top:2.5rem;--sec:4.5rem;--block:1.5rem;--pad-lg:1.5rem}.foot{flex-direction:column;align-items:flex-start;gap:.75rem}.acts .btn{flex:1 1 100%}}
+@media (prefers-reduced-motion:reduce){.btn:active{transform:none}}
+@media (prefers-contrast:more){.unit{border-color:rgba(255,255,255,.45)}.p{color:#e3e8ef}}
 </style>
+<style>html{scroll-behavior:smooth;scroll-padding-top:72px}@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}</style>
 </head>
 <body>
-<div style="min-height:100vh;display:flex;flex-direction:column">
+<div class="site" style="min-height: 100vh; background: #11151b; color: #eef1f6; font-family: Inter, 'Helvetica Neue', sans-serif; display: flex; flex-direction: column">
 
-<header style="background:rgba(22,27,34,.92);border-bottom:1px solid rgba(255,255,255,.08)">
-<div class="wrap" style="display:flex;align-items:center;gap:24px;height:64px">
-<a href="/" style="font-weight:700;font-size:22px;letter-spacing:.14em" aria-label="TORE home">TORE</a>
-<span style="flex:1"></span>
-<a href="/" style="font-size:13px;font-weight:600;letter-spacing:.04em;color:#c4ccd8">← Back to TORE</a>
+<header style="background: #161b22; border-bottom: 1px solid rgba(255,255,255,.08)">
+<div class="wrap" style="display: flex; align-items: center; gap: 1.5rem; height: 4rem">
+<a href="/" style="font-weight: 700; font-size: 1.375rem; letter-spacing: .14em" aria-label="TORE home">TORE</a>
+<span style="flex: 1"></span>
+<a class="back" href="/"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M10 3L5 8l5 5"></path></svg>Back to TORE</a>
 </div>
 </header>
 
-<main style="flex:1;display:flex;justify-content:center;padding:72px 20px 96px">
-<div style="width:100%;max-width:560px;display:flex;flex-direction:column;gap:28px">
-
-<div class="unit card" style="border-top:3px solid #3d8bff;padding:40px;display:flex;flex-direction:column;gap:24px">
-<span class="soon"><i></i>Sales open soon</span>
-<div style="display:flex;justify-content:space-between;align-items:flex-start;gap:16px">
-<div style="display:flex;flex-direction:column;gap:6px"><span style="font-weight:700;font-size:24px;letter-spacing:.12em">TORE</span><span style="font-size:15px;color:#8d97a6">Early Alpha · Lifetime licence</span></div>
-<div style="display:flex;align-items:baseline;gap:6px"><span style="font-size:52px;font-weight:800;letter-spacing:-.03em;line-height:1">£20</span></div>
+<main class="wrap" style="flex: 1; width: 100%; display: flex; justify-content: center; padding-top: var(--top); padding-bottom: var(--sec)">
+<div style="width: 100%; max-width: 35rem; display: flex; flex-direction: column; gap: var(--block)">
+<div class="unit card" style="border-top: 3px solid #09A3F6">
+<span class="soon"><i></i>Pre-alpha</span>
+<h1 style="margin: 0; font-size: clamp(1.875rem, 4vw, 2.5rem); line-height: 1.1; font-weight: 800; letter-spacing: -.03em">TORE isn't on sale yet.</h1>
+<p class="p">TORE is still in pre-alpha. It works, but it isn't ready for a public release, so it can't be bought yet.</p>
+<p class="p">Email us and we'll let you know as soon as it's available.</p>
+<div class="acts" style="display: flex; flex-wrap: wrap; gap: .75rem; margin-top: .25rem">
+<a class="btn pri lg" href="mailto:support@toreaudio.com?subject=Let%20me%20know%20when%20TORE%20is%20available">Get notified</a>
+<a class="btn lg" href="/#features">See the features</a>
 </div>
-<div style="display:flex;flex-direction:column;gap:10px">
-<div class="tick"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#3d8bff" stroke-width="2" aria-hidden="true"><path d="M3 8.5l3 3 7-7"></path></svg><span>Pay once – every future update included</span></div>
-<div class="tick"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#3d8bff" stroke-width="2" aria-hidden="true"><path d="M3 8.5l3 3 7-7"></path></svg><span>Your serial is registered to you for life</span></div>
-<div class="tick"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#3d8bff" stroke-width="2" aria-hidden="true"><path d="M3 8.5l3 3 7-7"></path></svg><span>Download straight away</span></div>
 </div>
-<a class="btn pri full" href="mailto:support@toreaudio.com?subject=TORE%20early%20alpha">Get early access · Email us</a>
-<p style="margin:-8px 0 0;font-size:13px;line-height:1.55;color:#8d97a6;text-align:center">Online checkout is on its way. Until then, email <a href="mailto:support@toreaudio.com" style="color:#c4ccd8;text-decoration:underline">support@toreaudio.com</a> and we'll get you set up.</p>
-</div>
-
-<div class="how" aria-label="How it works">
-<div><b>01</b><strong>Pay</strong>Pay £20 once. That's it.</div>
-<div><b>02</b><strong>Get your serial</strong>It's sent to your email.</div>
-<div><b>03</b><strong>Play</strong>Download TORE for Mac and enter your serial.</div>
-</div>
-
-<p style="margin:0;font-size:13px;line-height:1.6;color:#8d97a6;text-align:center">Needs a Mac with Apple Silicon (M1 or later). TORE is early alpha software, in active development.</p>
-
+<p style="margin: 0; text-align: center; font-size: .8125rem; line-height: 1.6; color: #97a1b0">TORE will run on Macs with Apple Silicon (M1 or later). Questions? <a href="mailto:support@toreaudio.com" style="color: #c4ccd8; text-decoration: underline">support@toreaudio.com</a></p>
 </div>
 </main>
 
-<footer style="border-top:1px solid rgba(255,255,255,.08);background:#0d1015">
-<div class="wrap" style="display:flex;flex-wrap:wrap;gap:24px;align-items:center;padding-top:28px;padding-bottom:28px">
-<span style="font-weight:700;font-size:18px;letter-spacing:.14em">TORE</span>
-<span style="font-size:13px;color:#8d97a6">© 2026 Tore Audio. All rights reserved.</span>
+<footer style="border-top: 1px solid rgba(255,255,255,.08); background: #0d1015">
+<div class="wrap foot">
+<span style="font-weight: 700; font-size: 1.125rem; letter-spacing: .14em">TORE</span>
+<span style="font-size: .8125rem; color: #97a1b0">© 2026 Tore Audio. All rights reserved.</span>
 </div>
 </footer>
 </div>
