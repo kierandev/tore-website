@@ -66,80 +66,71 @@ pads = ''.join('<button type="button" class="pad" style="--c: %s; %s" aria-label
     c, ('background: %s; color: #11151b' % c) if i < 3 else 'box-shadow: inset 0 -2px 0 %s' % c, i + 1, i + 1) for i, c in enumerate(colors))
 body = re.sub(r'<sc-for list="\{\{pads\}\}".*?</sc-for>', pads, body, flags=re.S)
 
-for key, view, shown in [('isC', 'canvas', False), ('isP', 'perform', True), ('isT', 'timeline', False)]:
-    body = re.sub(r'<sc-if value="\{\{%s\}\}" hint-placeholder-val="\{\{ (?:true|false) \}\}">(.*?)</sc-if>' % key,
-                  lambda m: '<div class="panel" data-panel="%s"%s>%s</div>' % (view, '' if shown else ' hidden', m.group(1)), body, count=1, flags=re.S)
-
-CAP_P = "Perform: two or four decks around the mixer and library, laid out for playing live."
 rep = [
-    ('class="win {{goCls}}"', 'class="win js-go"'),
-    ('class="band {{bandCls}}"', 'class="band js-go"'),
-    ('class="stage {{stageCls}}"', 'class="stage js-go"'),
-    ('class="wave {{waveCls}}"', 'class="wave js-go"'),
-    ('class="mb play {{playCls}}"', 'class="mb play js-live"'),
-    ('class="mb {{syncCls}}" aria-pressed="{{sync}}" onClick="{{toggleSync}}"', 'class="mb sync" aria-pressed="true" data-act="sync"'),
-    ('aria-label="{{playLabel}}" aria-pressed="{{playing}}" onClick="{{togglePlay}}"', 'aria-label="Play" aria-pressed="false" data-act="play"'),
-    ('aria-pressed="{{playing}}" aria-label="{{playLabel}}" onClick="{{togglePlay}}"', 'aria-pressed="false" aria-label="Play" data-act="play"'),
-    ('onClick="{{cue}}"', 'data-act="cue"'),
-    ('<span style="color: #97a1b0">{{status}}</span>', '<span style="color: #97a1b0" data-status>Paused</span>'),
-    ('<span class="tag" style="font-size: .6875rem">{{hint}}</span>', '<span class="tag" style="font-size: .6875rem" data-hint>Press play</span>'),
-    ('class="{{tabC}}" aria-selected="{{selC}}" onClick="{{showC}}"', 'aria-selected="false" data-view="canvas"'),
-    ('class="{{tabP}}" aria-selected="{{selP}}" onClick="{{showP}}"', 'class="on" aria-selected="true" data-view="perform"'),
-    ('class="{{tabT}}" aria-selected="{{selT}}" onClick="{{showT}}"', 'aria-selected="false" data-view="timeline"'),
-    ('aria-label="{{viewName}} view"', 'aria-label="Perform view" data-stage'),
-    ('<p class="cap">{{viewCap}}</p>', '<p class="cap" data-cap aria-live="polite">%s</p>' % CAP_P),
+    ('class="{{tourCls}}"', 'class="tour s-perform" data-tour'),
+    ('aria-selected="{{sel0}}" onClick="{{go0}}"', 'aria-selected="true" data-go="0"'),
+    ('aria-selected="{{sel1}}" onClick="{{go1}}"', 'aria-selected="false" data-go="1"'),
+    ('aria-selected="{{sel2}}" onClick="{{go2}}"', 'aria-selected="false" data-go="2"'),
+    ('aria-label="{{pauseLabel}}" onClick="{{togglePause}}"', 'aria-label="Pause the tour" data-act="pause"'),
 ]
 for a, b in rep:
-    n = body.count(a)
-    assert n >= 1, a
+    assert body.count(a) == 1, a
     body = body.replace(a, b)
 assert '{{' not in body and '<sc-' not in body and 'onClick' not in body, re.findall(r'.{40}(?:\{\{|<sc-|onClick).{40}', body)[:5]
 
-script = r'''<script>
+script = r"""<script>
 (function () {
-  var playing = false, sync = true, t;
-  var caps = {
-    canvas: 'Canvas: lay out every unit, patch keys and MIDI between them, design sounds and build patterns.',
-    perform: 'Perform: two or four decks around the mixer and library, laid out for playing live.',
-    timeline: 'Timeline: capture what you play, then shape it afterwards with automation.'
-  };
+  var tour = document.querySelector('[data-tour]');
+  if (!tour) return;
+  var names = ['perform', 'canvas', 'timeline'], MS = 10000;
+  var scene = 0, paused = false, timer, start, left = MS, t;
   function $$(s) { return Array.prototype.slice.call(document.querySelectorAll(s)); }
-  function setPlay(p) {
-    playing = p;
-    $$('.js-go').forEach(function (e) { e.classList.toggle('go', p); });
-    $$('.js-live').forEach(function (e) { e.classList.toggle('lit', p); });
-    $$('[data-act="play"]').forEach(function (e) { e.setAttribute('aria-pressed', p ? 'true' : 'false'); e.setAttribute('aria-label', p ? 'Pause' : 'Play'); });
-    $$('[data-status]').forEach(function (e) { e.textContent = p ? 'Playing' : 'Paused'; });
-    $$('[data-hint]').forEach(function (e) { e.textContent = p ? 'CUE to stop' : 'Press play'; });
+  function show(i) {
+    scene = i;
+    names.forEach(function (n) { tour.classList.remove('s-' + n); });
+    void tour.offsetWidth; // restart the scene's animations even when re-selecting the same view
+    tour.classList.add('s-' + names[i]);
+    $$('[data-go]').forEach(function (b) { b.setAttribute('aria-selected', +b.getAttribute('data-go') === i ? 'true' : 'false'); });
+  }
+  function arm(ms) {
+    clearTimeout(timer); left = ms; start = Date.now();
+    timer = setTimeout(function () { show((scene + 1) % 3); arm(MS); }, ms);
+  }
+  function setPaused(p) {
+    paused = p;
+    tour.classList.toggle('paused', p);
+    var b = document.querySelector('[data-act="pause"]');
+    if (b) b.setAttribute('aria-label', p ? 'Play the tour' : 'Pause the tour');
   }
   document.addEventListener('click', function (ev) {
-    var b = ev.target.closest('[data-act],[data-pad],[data-view]');
+    var b = ev.target.closest('[data-go],[data-act="pause"],[data-pad]');
     if (!b) return;
     if (b.hasAttribute('data-pad')) {
       clearTimeout(t);
       $$('[data-pad]').forEach(function (e) { e.classList.remove('hit'); });
       b.classList.add('hit');
       t = setTimeout(function () { b.classList.remove('hit'); }, 220);
-      setPlay(true);
-      return;
+    } else if (b.hasAttribute('data-go')) {
+      show(+b.getAttribute('data-go'));
+      if (paused) left = MS; else arm(MS);
+    } else if (paused) {
+      setPaused(false); arm(left || MS);
+    } else {
+      clearTimeout(timer);
+      left = Math.max(500, left - (Date.now() - start));
+      setPaused(true);
     }
-    if (b.hasAttribute('data-view')) {
-      var v = b.getAttribute('data-view');
-      $$('[data-view]').forEach(function (e) { var on = e === b; e.classList.toggle('on', on); e.setAttribute('aria-selected', on ? 'true' : 'false'); });
-      $$('[data-panel]').forEach(function (e) { e.hidden = e.getAttribute('data-panel') !== v; });
-      var st = document.querySelector('[data-stage]');
-      if (st) st.setAttribute('aria-label', v.charAt(0).toUpperCase() + v.slice(1) + ' view');
-      var c = document.querySelector('[data-cap]');
-      if (c) c.textContent = caps[v];
-      return;
-    }
-    var a = b.getAttribute('data-act');
-    if (a === 'play') setPlay(!playing);
-    else if (a === 'cue') setPlay(false);
-    else if (a === 'sync') { sync = !sync; b.classList.toggle('sync', sync); b.setAttribute('aria-pressed', sync ? 'true' : 'false'); }
   });
+  // don't run the tour in a background tab
+  document.addEventListener('visibilitychange', function () {
+    if (paused) return;
+    if (document.hidden) { clearTimeout(timer); left = Math.max(500, left - (Date.now() - start)); tour.classList.add('paused'); }
+    else { tour.classList.remove('paused'); arm(left); }
+  });
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduce) setPaused(true); else arm(MS);
 })();
-</script>'''
+</script>"""
 
 home = head('TORE – DJ, produce and perform in one Mac app',
             'TORE brings decks, a mixer, a drum machine, a sampler, an FM synth, a sequencer and a recorder together on one canvas. In pre-alpha – not yet available.',
