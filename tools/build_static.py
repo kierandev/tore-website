@@ -42,7 +42,7 @@ def head(title, desc, canonical, helmet):
 <meta property="og:description" content="{desc}">
 <meta property="og:url" content="{canonical}">
 <meta property="og:type" content="website">
-<meta name="theme-color" content="#161616">
+<meta name="theme-color" content="#11151b">
 <link rel="canonical" href="{canonical}">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 {helmet}

@@ -9,17 +9,17 @@
 <meta property="og:description" content="TORE brings decks, a mixer, a drum machine, a sampler, an FM synth, a sequencer and a recorder together on one canvas. In pre-alpha – not yet available.">
 <meta property="og:url" content="https://toreaudio.com/">
 <meta property="og:type" content="website">
-<meta name="theme-color" content="#161616">
+<meta name="theme-color" content="#11151b">
 <link rel="canonical" href="https://toreaudio.com/">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <style>
 *{box-sizing:border-box}
-body{margin:0;background:#161616}
-a{color:#fafafa;text-decoration:none}a:hover{color:#ffffff}
+body{margin:0;background:#11151b}
+a{color:#eef1f6;text-decoration:none}a:hover{color:#ffffff}
 /* ---- TORE design tokens (DesignKit/tore-tokens.json) ---- */
-.site{--bg:#161616;--panel:#1c1c1c;--unit:#1f1f1f;--unit-head:#242424;--raise:#262626;--raise2:#2e2e2e;--wbg:#0a0a0a;
+.site{--bg:#11151b;--panel:#161b22;--unit:#181e26;--unit-head:#1c232c;--raise:#1d252f;--raise2:#232c39;--wbg:#000;
 --line:rgba(255,255,255,.12);--line2:rgba(255,255,255,.16);--line3:rgba(255,255,255,.24);
---ink:#fafafa;--ink2:#c8c8c8;--muted:#9a9a9a;--accent:#FF6347;--link:#09A3F6;--linkbg:#0b2a3d;
+--ink:#eef1f6;--ink2:#c4ccd8;--muted:#97a1b0;--accent:#3d8bff;--on-acc:#fff;--lib:#ff6347;--link:#09A3F6;--linkbg:#0b2a3d;
 --step-on:#59d36b;--step-accent:#ffb52e;--sync:#3d8bff;--play:#d7f25a;--play-dim:#3a3f2a;--playhead:#ff3b30;
 --w-low:#ff4619;--w-mid:#46e650;--w-high:#505aff;
 --gutter:2rem;--sec:7rem;--top:4.5rem;--block:2.5rem;--stack:1rem;--pad:1.25rem;--pad-lg:2.75rem;--gap:.75rem;
@@ -31,8 +31,8 @@ button{font:inherit;color:inherit}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;height:2.75rem;padding:0 1.25rem;border-radius:99999px;border:1px solid var(--line3);background:transparent;color:var(--ink);font-weight:700;font-size:.9375rem;white-space:nowrap;cursor:pointer;transition:background-color 150ms ease-out,transform 100ms ease-out,border-color 150ms ease-out}
 .btn:hover{background:var(--raise);color:#fff}
 .btn:active{transform:scale(.97)}
-.btn.acc{background:var(--accent);border-color:var(--accent);color:var(--bg)}
-.btn.acc:hover{background:#ff7a62;border-color:#ff7a62;color:var(--bg)}
+.btn.acc{background:var(--accent);border-color:var(--accent);color:var(--on-acc)}
+.btn.acc:hover{background:#5a9dff;border-color:#5a9dff;color:var(--on-acc)}
 .btn.sm{height:2.25rem;padding:0 1rem;font-size:.875rem}
 .btn.lg{height:3rem;padding:0 1.5rem;font-size:1rem}
 .lab{font-size:.6875rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
@@ -57,7 +57,7 @@ button{font:inherit;color:inherit}
 .nav a.l:hover{color:#fff}
 .wordmark{font-weight:700;font-size:1.375rem;letter-spacing:-.02em}
 /* ---- the app window (tour) ---- */
-.win{margin-top:var(--block);border:1px solid var(--line2);border-radius:10px;background:var(--bg);overflow:hidden;box-shadow:0 50px 120px -50px rgba(255,99,71,.28),0 30px 60px -30px rgba(0,0,0,.9);font-size:12px;line-height:1.35;text-align:left}
+.win{margin-top:var(--block);border:1px solid var(--line2);border-radius:10px;background:var(--bg);overflow:hidden;box-shadow:0 50px 120px -50px rgba(20,225,255,.22),0 30px 60px -30px rgba(0,0,0,.9);font-size:12px;line-height:1.35;text-align:left}
 .wtb{display:flex;align-items:center;gap:12px;height:52px;padding:0 12px;background:var(--panel);border-bottom:1px solid var(--line)}
 .wtb .wordmark{font-size:19px}
 .vsw{display:flex;gap:3px;padding:3px;border-radius:99999px;background:var(--raise)}
@@ -78,7 +78,7 @@ button{font:inherit;color:inherit}
 .mkn::after{content:"";position:absolute;left:3px;bottom:5px;width:8px;height:2px;background:var(--accent);transform:rotate(-40deg);border-radius:1px}
 .ib{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:8px;border:1px solid var(--line3)}
 .ib svg{stroke:var(--ink2)}
-.ib.hot{background:rgba(255,99,71,.18);border-color:rgba(255,99,71,.6)}.ib.hot svg{stroke:var(--accent)}
+.ib.hot{background:rgba(61,139,255,.18);border-color:rgba(61,139,255,.6)}.ib.hot svg{stroke:var(--accent)}
 .scenes{display:grid}
 .scene{grid-area:1 / 1;opacity:0;visibility:hidden;transition:opacity 450ms ease-out,visibility 0s linear 450ms;min-height:30rem}
 .s-perform .sc-perform,.s-canvas .sc-canvas,.s-timeline .sc-timeline{opacity:1;visibility:visible;transition:opacity 450ms ease-out}
@@ -103,12 +103,12 @@ button{font:inherit;color:inherit}
 .wave{position:relative;height:84px;background:var(--wbg);overflow:hidden}
 .track{position:absolute;top:6px;bottom:6px;left:0;width:200%;display:flex;animation:scroll 18s linear infinite;animation-play-state:paused}
 .bars{flex:1;display:flex;align-items:center;gap:1px}
-.bars b{flex:1;display:block;min-width:1px;background:linear-gradient(var(--w-low) 0%,var(--w-low) 18%,var(--w-mid) 32%,#e8f0ff 47%,#e8f0ff 53%,var(--w-mid) 68%,var(--w-low) 82%,var(--w-low) 100%)}
-.wave.b2 .bars b{background:linear-gradient(var(--w-low) 0%,var(--w-mid) 22%,var(--w-high) 40%,#e8f0ff 50%,var(--w-high) 60%,var(--w-mid) 78%,var(--w-low) 100%)}
+.bars b{flex:1;display:block;min-width:1px;border-radius:1px;background:linear-gradient(#ff5fd2,#b026ff 12%,#14e1ff 32%,#e8f6ff 50%,#14e1ff 68%,#b026ff 88%,#ff5fd2)}
+.wave.b2 .bars b{background:linear-gradient(#ff2d8c,#d03cff 25%,#ff9be8 50%,#d03cff 75%,#ff2d8c)}
 @keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 .grid4{position:absolute;inset:0;background-image:repeating-linear-gradient(90deg,rgba(255,255,255,.7) 0 1px,transparent 1px 25%);background-position:12% 0;pointer-events:none;opacity:.55}
 .ph{position:absolute;top:0;bottom:0;left:50%;width:2px;background:var(--playhead)}
-.ov{height:12px;background:linear-gradient(var(--w-low),var(--w-mid) 40%,var(--w-high) 60%,var(--w-low));opacity:.85;position:relative}
+.ov{height:4px;margin:4px 0;background:linear-gradient(90deg,#14e1ff,#e8f6ff 20%,#b026ff 45%,#14e1ff 70%,#e8f6ff);opacity:.85;position:relative}
 .ov::after{content:"";position:absolute;top:-2px;bottom:-2px;left:34%;width:2px;background:var(--playhead)}
 .pbtn{display:inline-flex;align-items:center;justify-content:center;width:56px;height:32px;border-radius:5px;background:var(--play-dim)}
 .cbtn{display:inline-flex;align-items:center;justify-content:center;width:46px;height:32px;border-radius:5px;border:1px solid #ff8a3d;color:#ff8a3d;font-weight:700;font-size:12px;background:var(--unit)}
@@ -136,11 +136,11 @@ button.pad{cursor:pointer;transition:filter 120ms ease-out}
 .msa{display:flex;gap:3px}.msa span{width:18px;height:18px;border-radius:4px;border:1px solid var(--line3);font-size:8.5px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;color:var(--ink2)}
 .xf{grid-column:1 / -1;height:16px;position:relative;margin:0 6px}.xf::before{content:"";position:absolute;left:0;right:0;top:7px;height:3px;background:#2a2a2a;border-radius:2px}
 .xf i{position:absolute;top:2px;left:22%;width:24px;height:12px;margin-left:-12px;border-radius:2px;background:#e4e4e4;display:block}
-.lib{border-top:3px solid var(--accent)}
+.lib{border-top:3px solid var(--lib)}
 .lib .uh{height:36px;padding:0 10px}.lib .uh .un{font-size:15px}
 .chips{display:flex;gap:6px;align-items:center;padding:8px 10px 4px;font-size:10.5px;color:var(--muted)}
 .chp{height:20px;padding:0 9px;border-radius:99999px;border:1px solid var(--line3);display:inline-flex;align-items:center;color:var(--ink2);font-weight:700}
-.chp.a{background:var(--accent);border-color:var(--accent);color:var(--bg)}
+.chp.a{background:var(--accent);border-color:var(--accent);color:var(--on-acc)}
 .lrow{display:grid;grid-template-columns:7rem 26px minmax(0,2fr) minmax(0,1.3fr) 3.5rem 3rem;gap:10px;align-items:center;padding:5px 10px;border-top:1px solid rgba(255,255,255,.06);font-size:12px}
 .lrow.hd{font-size:9.5px;letter-spacing:.08em;color:var(--muted);border-top:0;padding-top:6px}
 .lrow .t{font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -148,7 +148,7 @@ button.pad{cursor:pointer;transition:filter 120ms ease-out}
 .art{width:26px;height:26px;border-radius:3px;background:linear-gradient(135deg,#3a3a3a,#242424)}
 .kp{display:inline-flex;align-items:center;height:20px;padding:0 8px;border-radius:99999px;background:var(--raise);font-weight:700;font-size:11px}
 .kp.m{background:var(--step-on);color:#0d1a10}
-.thumb{height:18px;display:flex;align-items:center;gap:1px}.thumb b{flex:1;display:block;background:linear-gradient(var(--w-low),var(--w-mid) 35%,#e8f0ff 50%,var(--w-mid) 65%,var(--w-low))}
+.thumb{height:18px;display:flex;align-items:center;gap:1px}.thumb b{flex:1;display:block;background:linear-gradient(#b026ff,#14e1ff 35%,#e8f6ff 50%,#14e1ff 65%,#b026ff)}
 /* canvas */
 .cwrap{position:relative;height:100%;min-height:30rem;overflow:hidden}
 .cgrid{position:absolute;inset:0;background-color:var(--bg);background-image:radial-gradient(circle,rgba(255,255,255,.14) 1px,transparent 1.4px);background-size:20px 20px}
@@ -172,10 +172,10 @@ button.pad{cursor:pointer;transition:filter 120ms ease-out}
 .cables{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
 /* timeline */
 .tlt{display:flex;align-items:center;gap:6px;padding:8px 10px;border-bottom:1px solid var(--line)}
-.recp{display:inline-flex;align-items:center;gap:5px;height:26px;padding:0 11px;border-radius:99999px;border:1px solid var(--accent);color:var(--accent);font-weight:700;font-size:11.5px}
-.recp i{width:8px;height:8px;border-radius:50%;background:var(--accent);display:block}
-.s-timeline .recp{background:var(--accent);color:var(--bg)}.s-timeline .recp i{background:var(--bg);animation:blink 1s steps(2,start) infinite}
-.tcode{font-size:15px;font-weight:700;margin:0 6px}.tcode small{display:block;font-size:9px;color:var(--accent)}
+.recp{display:inline-flex;align-items:center;gap:5px;height:26px;padding:0 11px;border-radius:99999px;border:1px solid var(--playhead);color:var(--playhead);font-weight:700;font-size:11.5px}
+.recp i{width:8px;height:8px;border-radius:50%;background:var(--playhead);display:block}
+.s-timeline .recp{background:var(--playhead);color:#fff}.s-timeline .recp i{background:#fff;animation:blink 1s steps(2,start) infinite}
+.tcode{font-size:15px;font-weight:700;margin:0 6px}.tcode small{display:block;font-size:9px;color:var(--playhead)}
 .tl{position:relative;display:flex;flex-direction:column;flex:1}
 .ruler{display:grid;grid-template-columns:8rem minmax(0,1fr);height:30px;border-bottom:1px solid var(--line)}
 .ruler div:first-child{font-size:9px;letter-spacing:.08em;color:var(--muted);padding:6px 10px;border-right:1px solid var(--line)}
@@ -184,7 +184,7 @@ button.pad{cursor:pointer;transition:filter 120ms ease-out}
 .tlr:nth-child(odd){background:rgba(255,255,255,.015)}
 .tlr .nm{display:flex;align-items:center;justify-content:space-between;padding:0 10px;font-size:12px;font-weight:700;border-left:3px solid var(--c);border-right:1px solid var(--line)}
 .tlr .nm small{font-size:8.5px;letter-spacing:.08em;color:var(--muted)}
-.s-timeline .tlr .nm small{color:var(--accent)}
+.s-timeline .tlr .nm small{color:var(--playhead)}
 .lane2{position:relative;background-image:repeating-linear-gradient(90deg,rgba(255,255,255,.05) 0 1px,transparent 1px 12.5%)}
 .clip{position:absolute;top:10%;bottom:10%;background:color-mix(in srgb,var(--c) 22%,#1f1f1f);border:1px solid color-mix(in srgb,var(--c) 70%,transparent);border-radius:3px;overflow:hidden}
 .clip b{position:absolute;left:4px;top:2px;font-size:8.5px;color:var(--ink)}
@@ -482,7 +482,7 @@ button.pad{cursor:pointer;transition:filter 120ms ease-out}
 </div>
 </div>
 <div class="tourbar">
-<div class="caps" aria-hidden="true"><span class="c c-perform c1">Perform: beat-synced decks with full-colour waveforms</span><span class="c c-perform c2">Eight hot cues and loops on every deck</span><span class="c c-perform c3">A full mixer: EQ, filter, effects and crossfader</span><span class="c c-canvas c1">Canvas: build your own setup from units</span><span class="c c-canvas c2">Drum machine, sequencer and the ONE FM synth</span><span class="c c-canvas c3">Link units together</span><span class="c c-timeline c1">Timeline: hit Record</span><span class="c c-timeline c2">Every channel is captured on its own lane</span><span class="c c-timeline c3">Shape it afterwards with automation</span></div>
+<div class="caps" aria-hidden="true"><span class="c c-perform c1">Perform: beat-synced decks with neon waveforms</span><span class="c c-perform c2">Eight hot cues and loops on every deck</span><span class="c c-perform c3">A full mixer: EQ, filter, effects and crossfader</span><span class="c c-canvas c1">Canvas: build your own setup from units</span><span class="c c-canvas c2">Drum machine, sequencer and the ONE FM synth</span><span class="c c-canvas c3">Link units together</span><span class="c c-timeline c1">Timeline: hit Record</span><span class="c c-timeline c2">Every channel is captured on its own lane</span><span class="c c-timeline c3">Shape it afterwards with automation</span></div>
 <p class="sr">TORE has three views. Perform: beat-synced decks, hot cues and a full mixer for playing live. Canvas: build your own setup from units like the drum machine, sequencer and ONE FM synth, and link them together. Timeline: record what you play, with every channel on its own lane, and shape it afterwards with automation.</p>
 <div class="pills" role="tablist" aria-label="Tour views">
 <button type="button" role="tab" class="pill" aria-selected="true" data-go="0">Perform<i class="fill"></i></button>
@@ -512,7 +512,7 @@ button.pad{cursor:pointer;transition:filter 120ms ease-out}
 <div class="kb">
 <div class="vis" aria-hidden="true"><span class="tk sync">SYNC</span><span class="tk">MASTER</span><span class="fl"></span><b style="font-size: .9375rem">124.00</b><b style="font-size: .9375rem; color: var(--step-on)">8A</b></div>
 <h3 class="h3">Mix with everything in view</h3>
-<p class="p sm">Full-colour waveforms on a beat grid, SYNC and MASTER, eight colour-coded hot cues, loops, quantise and pitch with a selectable range. Title, artist, time left, BPM and key stay visible at every size.</p>
+<p class="p sm">Neon waveforms on a beat grid, SYNC and MASTER, eight colour-coded hot cues, loops, quantise and pitch with a selectable range. Title, artist, time left, BPM and key stay visible at every size.</p>
 </div>
 </article>
 <article class="u rv" style="border-top: 3px solid #3d8bff">
@@ -531,7 +531,7 @@ button.pad{cursor:pointer;transition:filter 120ms ease-out}
 <p class="p sm">A drum machine with your own kits, a sampler that swaps with any deck, the ONE FM synth, and a sequencer with a piano roll, snap, nudge and swing.</p>
 </div>
 </article>
-<article class="u rv" style="border-top: 3px solid #FF6347">
+<article class="u rv" style="border-top: 3px solid #ff5fd2">
 <div class="uh"><span class="dot"></span><b class="un">Timeline</b></div>
 <div class="kb">
 <div class="vis" aria-hidden="true"><span class="recp" style="height: 24px"><i></i>Record</span><span class="fl"></span><span class="tk on">SNAP</span><span class="tk on">READ</span><span class="tk">● WRITE</span></div>
@@ -558,7 +558,7 @@ button.pad{cursor:pointer;transition:filter 120ms ease-out}
 </div>
 <div class="vw">
 <article class="u rv"><span class="ic" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#c8c8c8" stroke-width="1.5"><rect x="2" y="2" width="5" height="5" rx="1"></rect><rect x="9" y="2" width="5" height="5" rx="1"></rect><rect x="2" y="9" width="5" height="5" rx="1"></rect><rect x="9" y="9" width="5" height="5" rx="1"></rect></svg></span><h3 class="h3">Canvas</h3><p class="p sm">Lay out every unit, link keys and MIDI, design sounds and build patterns.</p></article>
-<article class="u rv"><span class="ic on" aria-hidden="true"><svg width="18" height="16" viewBox="0 0 18 16" fill="none" stroke="#161616" stroke-width="1.6"><circle cx="5.5" cy="8" r="3.8"></circle><circle cx="12.5" cy="8" r="3.8"></circle></svg></span><h3 class="h3">Perform</h3><p class="p sm">Two or four decks around the mixer and library, laid out for playing live.</p></article>
+<article class="u rv"><span class="ic on" aria-hidden="true"><svg width="18" height="16" viewBox="0 0 18 16" fill="none" stroke="#11151b" stroke-width="1.6"><circle cx="5.5" cy="8" r="3.8"></circle><circle cx="12.5" cy="8" r="3.8"></circle></svg></span><h3 class="h3">Perform</h3><p class="p sm">Two or four decks around the mixer and library, laid out for playing live.</p></article>
 <article class="u rv"><span class="ic" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#c8c8c8" stroke-width="1.5"><path d="M2 4h8M5 8h9M2 12h6"></path></svg></span><h3 class="h3">Timeline</h3><p class="p sm">Capture what you play and shape it afterwards with automation.</p></article>
 </div>
 </section>
@@ -581,7 +581,7 @@ button.pad{cursor:pointer;transition:filter 120ms ease-out}
 </section>
 
 <section id="availability" class="wrap sec">
-<div class="u cta rv" style="border-top: 3px solid #FF6347">
+<div class="u cta rv" style="border-top: 3px solid #3d8bff">
 <div class="head" style="flex: 1 1 24rem">
 <span class="lab" style="color: var(--accent)">Availability</span>
 <h2 class="h2" style="font-size: clamp(1.625rem, 2.8vw, 2rem)">Not on sale yet.</h2>
