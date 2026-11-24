@@ -15,32 +15,60 @@
 <style>
 *{box-sizing:border-box}
 body{margin:0;background:#11151b}
-a{color:#fafafa;text-decoration:none}a:hover{color:#ffffff}
-.site{--bg:#11151b;--panel:#161b22;--unit:#181e26;--unit-head:#1c232c;--raise:#1d252f;--line:rgba(255,255,255,.12);--line2:rgba(255,255,255,.16);--line3:rgba(255,255,255,.24);
+a{color:#eef1f6;text-decoration:none}a:hover{color:#ffffff}
+.site{--bg:#11151b;--panel:#161b22;--unit:#181e26;--unit-head:#1c232c;--raise:#1d252f;--raise2:#232c39;--line:rgba(255,255,255,.12);--line2:rgba(255,255,255,.16);--line3:rgba(255,255,255,.24);
 --ink:#eef1f6;--ink2:#c4ccd8;--muted:#97a1b0;--accent:#3d8bff;--on-acc:#fff;--link:#09A3F6;
---gutter:2rem;--top:4.5rem;--sec:7rem;--block:1.75rem;--pad-lg:2.5rem;
-font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-weight:600;font-size:1rem;line-height:1.5;color:var(--ink);background:var(--bg);-webkit-font-smoothing:antialiased}
+--gutter:2rem;--top:4.5rem;--sec:7rem;--block:2.5rem;--pad:1.75rem;
+font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-weight:600;font-size:1rem;line-height:1.5;color:var(--ink);background:var(--bg);-webkit-font-smoothing:antialiased;font-variant-numeric:tabular-nums}
 .wrap{max-width:72rem;margin:0 auto;padding-left:var(--gutter);padding-right:var(--gutter)}
 :where(a,button):focus-visible{outline:2px solid var(--link);outline-offset:2px}
 .wordmark{font-weight:700;font-size:1.375rem;letter-spacing:-.02em}
+.lab{font-size:.6875rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;height:3rem;padding:0 1.5rem;border-radius:99999px;border:1px solid var(--line3);background:transparent;color:var(--ink);font-weight:700;font-size:1rem;white-space:nowrap;cursor:pointer;transition:background-color 150ms ease-out,transform 100ms ease-out}
 .btn:hover{background:var(--raise);color:#fff}
 .btn:active{transform:scale(.97)}
 .btn.acc{background:var(--accent);border-color:var(--accent);color:var(--on-acc)}
 .btn.acc:hover{background:#5a9dff;border-color:#5a9dff;color:var(--on-acc)}
-.u{background:var(--unit);border:1px solid var(--line2);border-top:3px solid var(--accent)}
-.uh{display:flex;align-items:center;gap:.625rem;height:2.75rem;padding:0 1rem;background:var(--unit-head);border-bottom:1px solid rgba(255,255,255,.1)}
-.uh b{font-weight:700;font-size:1rem}
-.uh .st{font-size:.75rem;color:var(--accent);font-weight:700;letter-spacing:.08em;text-transform:uppercase}
-.dot{width:8px;height:8px;border-radius:50%;background:var(--link);flex:none}
-.card{padding:var(--pad-lg);display:flex;flex-direction:column;gap:1.25rem}
-.p{margin:0;font-size:1.0625rem;font-weight:500;line-height:1.6;color:var(--ink2)}
+.btn.full{width:100%}
+.btn.off{color:var(--muted);border-color:var(--line2);cursor:default}
+.btn.off:hover{background:transparent;color:var(--muted)}
 .back{display:inline-flex;align-items:center;gap:.375rem;font-size:.875rem;font-weight:600;color:var(--ink2);padding:.75rem .25rem;transition:color 150ms ease-out}
 .back:hover{color:#fff}
+.h1{margin:0;font-weight:700;font-size:clamp(2.25rem,4.6vw,3.25rem);line-height:1.04;letter-spacing:-.03em;text-wrap:balance}
+.p{margin:0;font-size:1.0625rem;font-weight:500;line-height:1.6;color:var(--ink2);max-width:38rem}
+/* tiers: one panel, the first release raised out of it */
+.tiers{position:relative;display:grid;grid-template-columns:minmax(0,1.12fr) minmax(0,1fr) minmax(0,1fr);align-items:stretch;margin-top:1.5rem}
+.tiers::before{content:"";position:absolute;left:0;right:0;top:1.5rem;bottom:0;background:var(--unit);border:1px solid var(--line2)}
+.tier{position:relative;display:flex;flex-direction:column;gap:1.125rem;padding:calc(var(--pad) + 1.5rem) var(--pad) var(--pad)}
+.tier.first{margin-top:0;padding-top:var(--pad);background:var(--unit-head);border:2px solid var(--accent);box-shadow:0 30px 70px -30px rgba(61,139,255,.45),0 20px 40px -24px rgba(0,0,0,.8);z-index:1}
+.tier + .tier:not(.first)::before{content:"";position:absolute;left:0;top:calc(1.5rem + var(--pad));bottom:var(--pad);width:1px;background:var(--line)}
+.tier.first + .tier::before{display:none}
+.badge{display:inline-flex;align-self:flex-start;align-items:center;gap:.4rem;height:1.625rem;padding:0 .75rem;border-radius:99999px;font-size:.6875rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+.badge.b{background:rgba(61,139,255,.16);border:1px solid rgba(61,139,255,.55);color:#8ab8ff}
+.badge.g{border:1px solid var(--line3);color:var(--muted)}
+.badge i{width:7px;height:7px;border-radius:50%;background:var(--link);display:block}
+.price{display:flex;align-items:baseline;gap:.5rem}
+.price b{font-size:3rem;font-weight:700;letter-spacing:-.035em;line-height:1}
+.price span{font-size:.9375rem;font-weight:600;color:var(--muted)}
+.tba{font-size:1.625rem;font-weight:700;letter-spacing:-.02em;line-height:1.1;color:var(--ink2)}
+.tname{margin:0;font-size:1.5rem;font-weight:700;letter-spacing:-.02em}
+.tdesc{margin:0;font-size:.9375rem;font-weight:500;line-height:1.55;color:var(--ink2)}
+.ticks{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:.625rem}
+.ticks li{display:flex;gap:.625rem;font-size:.9375rem;font-weight:500;line-height:1.45;color:var(--ink2)}
+.ticks svg{flex:none;margin-top:2px}
+.tier.first .ticks li{color:var(--ink)}
+.spacer{flex:1}
 .foot{display:flex;flex-wrap:wrap;align-items:center;gap:1.5rem;padding-top:2rem;padding-bottom:2rem}
-@media (max-width:860px){.site{--gutter:1.25rem;--top:2.5rem;--sec:4.5rem;--block:1.5rem;--pad-lg:1.5rem}.foot{flex-direction:column;align-items:flex-start;gap:.75rem}.acts .btn{flex:1 1 100%}}
+@media (max-width:900px){
+.site{--gutter:1.25rem;--top:2.5rem;--sec:4.5rem;--block:1.75rem;--pad:1.5rem}
+.tiers{grid-template-columns:1fr;gap:.75rem}
+.tiers::before{display:none}
+.tier{padding-top:var(--pad);background:var(--unit);border:1px solid var(--line2)}
+.tier + .tier:not(.first)::before{display:none}
+.foot{flex-direction:column;align-items:flex-start;gap:.75rem}
+}
 @media (prefers-reduced-motion:reduce){.btn:active{transform:none}}
-@media (prefers-contrast:more){.u{border-color:rgba(255,255,255,.45)}.p{color:#e8e8e8}}
+@media (prefers-contrast:more){.tiers::before,.tier{border-color:rgba(255,255,255,.45)}.p,.tdesc,.ticks li{color:#e8e8e8}}
 </style>
 <style>html{scroll-behavior:smooth;scroll-padding-top:72px}@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}</style>
 </head>
@@ -55,22 +83,69 @@ font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-weight:600;font-siz
 </div>
 </header>
 
-<main class="wrap" style="flex: 1; width: 100%; display: flex; justify-content: center; padding-top: var(--top); padding-bottom: var(--sec)">
-<div style="width: 100%; max-width: 36rem; display: flex; flex-direction: column; gap: var(--block)">
-<section class="u" aria-labelledby="t">
-<div class="uh"><span class="dot"></span><b>Availability</b><span style="flex: 1"></span><span class="st">Pre-alpha</span></div>
-<div class="card">
-<h1 id="t" style="margin: 0; font-size: clamp(1.875rem, 4vw, 2.5rem); line-height: 1.08; font-weight: 700; letter-spacing: -.03em">TORE isn't on sale yet.</h1>
-<p class="p">TORE is still in pre-alpha. It works, but it isn't ready for a public release, so it can't be bought yet.</p>
-<p class="p">Email us and we'll let you know as soon as it's available.</p>
-<div class="acts" style="display: flex; flex-wrap: wrap; gap: .75rem; margin-top: .25rem">
+<main class="wrap" style="flex: 1; width: 100%; padding-top: var(--top); padding-bottom: var(--sec)">
+<div style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 1.5rem">
+<div style="display: flex; flex-direction: column; gap: 1rem">
+<span class="lab">Availability</span>
+<h1 class="h1">TORE isn't on sale yet.</h1>
+<p class="p">TORE is in pre-alpha: it works, but it isn't ready for a public release. It will open in stages, starting with the pre-alpha. Get notified and we'll tell you when it's available.</p>
+</div>
 <a class="btn acc" href="mailto:support@toreaudio.com?subject=Let%20me%20know%20when%20TORE%20is%20available">Get notified</a>
-<a class="btn" href="/#features">See the features</a>
 </div>
+
+<div class="tiers" role="list" aria-label="Release stages">
+
+<section class="tier first" role="listitem" aria-labelledby="t1">
+<span class="badge b"><i></i>Coming first</span>
+<div class="price"><b>£20</b><span>one-off</span></div>
+<div style="display: flex; flex-direction: column; gap: .5rem">
+<h2 class="tname" id="t1">Pre-alpha</h2>
+<p class="tdesc">Get TORE early, while it's being built, and help shape what comes next.</p>
 </div>
+<ul class="ticks">
+<li><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#3d8bff" stroke-width="2" aria-hidden="true"><path d="M3 8.5l3 3 7-7"></path></svg>Every pre-alpha build as it ships</li>
+<li><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#3d8bff" stroke-width="2" aria-hidden="true"><path d="M3 8.5l3 3 7-7"></path></svg>Perform, Canvas and Timeline</li>
+<li><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#3d8bff" stroke-width="2" aria-hidden="true"><path d="M3 8.5l3 3 7-7"></path></svg>Built-in bug reporter, straight to the developer</li>
+<li><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#3d8bff" stroke-width="2" aria-hidden="true"><path d="M3 8.5l3 3 7-7"></path></svg>Serial number registered to your account</li>
+<li><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#3d8bff" stroke-width="2" aria-hidden="true"><path d="M3 8.5l3 3 7-7"></path></svg>One-off payment – no subscription</li>
+</ul>
+<span class="spacer"></span>
+<a class="btn acc full" href="mailto:support@toreaudio.com?subject=Let%20me%20know%20when%20the%20TORE%20pre-alpha%20is%20available">Get notified</a>
 </section>
-<p style="margin: 0; text-align: center; font-size: .875rem; font-weight: 500; line-height: 1.6; color: var(--muted)">TORE will run on Macs with Apple Silicon (M1 or later). Questions? <a href="mailto:support@toreaudio.com" style="color: var(--ink2); text-decoration: underline">support@toreaudio.com</a></p>
+
+<section class="tier" role="listitem" aria-labelledby="t2">
+<span class="badge g">Later</span>
+<div class="tba">Price to be announced</div>
+<div style="display: flex; flex-direction: column; gap: .5rem">
+<h2 class="tname" id="t2">Beta</h2>
+<p class="tdesc">When the core features are finished and TORE is ready for wider testing.</p>
 </div>
+<ul class="ticks">
+<li><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#97a1b0" stroke-width="2" aria-hidden="true"><path d="M3 8.5l3 3 7-7"></path></svg>Everything in the pre-alpha</li>
+<li><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#97a1b0" stroke-width="2" aria-hidden="true"><path d="M3 8.5l3 3 7-7"></path></svg>Steadier builds</li>
+<li><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#97a1b0" stroke-width="2" aria-hidden="true"><path d="M3 8.5l3 3 7-7"></path></svg>One-off payment – no subscription</li>
+</ul>
+<span class="spacer"></span>
+<span class="btn off full" aria-disabled="true">Coming later</span>
+</section>
+
+<section class="tier" role="listitem" aria-labelledby="t3">
+<span class="badge g">Later</span>
+<div class="tba">Price to be announced</div>
+<div style="display: flex; flex-direction: column; gap: .5rem">
+<h2 class="tname" id="t3">Full release</h2>
+<p class="tdesc">TORE's first public release, version 1.0.</p>
+</div>
+<ul class="ticks">
+<li><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#97a1b0" stroke-width="2" aria-hidden="true"><path d="M3 8.5l3 3 7-7"></path></svg>The finished TORE</li>
+<li><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#97a1b0" stroke-width="2" aria-hidden="true"><path d="M3 8.5l3 3 7-7"></path></svg>One-off payment – no subscription</li>
+</ul>
+<span class="spacer"></span>
+<span class="btn off full" aria-disabled="true">Coming later</span>
+</section>
+</div>
+
+<p style="margin: 2rem 0 0; text-align: center; font-size: .875rem; font-weight: 500; line-height: 1.6; color: var(--muted)">TORE will run on Macs with Apple Silicon (M1 or later). Questions? <a href="mailto:support@toreaudio.com" style="color: var(--ink2); text-decoration: underline">support@toreaudio.com</a></p>
 </main>
 
 <footer style="border-top: 1px solid var(--line); background: var(--panel)">
