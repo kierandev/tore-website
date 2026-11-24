@@ -9,70 +9,74 @@
 <meta property="og:description" content="TORE is in pre-alpha and not yet available to buy. Get notified when it is.">
 <meta property="og:url" content="https://toreaudio.com/buy">
 <meta property="og:type" content="website">
-<meta name="theme-color" content="#11151b">
+<meta name="theme-color" content="#161616">
 <link rel="canonical" href="https://toreaudio.com/buy">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&amp;family=IBM+Plex+Mono:wght@500;600&amp;display=swap">
 <style>
 *{box-sizing:border-box}
-body{margin:0;background:#11151b}
-a{color:#eef1f6;text-decoration:none}a:hover{color:#ffffff}
-.site{--gutter:2rem;--top:5rem;--sec:7rem;--block:1.75rem;--pad-lg:2.5rem;font-size:1rem;line-height:1.6;font-optical-sizing:auto;-webkit-font-smoothing:antialiased}
-.wrap{max-width:70rem;margin:0 auto;padding-left:var(--gutter);padding-right:var(--gutter)}
-:where(a,button):focus-visible{outline:2px solid #3d8bff;outline-offset:3px}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;min-height:2.75rem;padding:0 1.25rem;font:600 .8125rem/1 Inter,sans-serif;letter-spacing:.06em;text-transform:uppercase;color:#eef1f6;background:#1d252f;border:1px solid rgba(255,255,255,.22);border-radius:4px;box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 2px 0 rgba(0,0,0,.35);white-space:nowrap;cursor:pointer;transition:background-color 150ms ease-out,transform 100ms ease-out}
-.btn:hover{background:#26303d;color:#fff}
+body{margin:0;background:#161616}
+a{color:#fafafa;text-decoration:none}a:hover{color:#ffffff}
+.site{--bg:#161616;--panel:#1c1c1c;--unit:#1f1f1f;--unit-head:#242424;--raise:#262626;--line:rgba(255,255,255,.12);--line2:rgba(255,255,255,.16);--line3:rgba(255,255,255,.24);
+--ink:#fafafa;--ink2:#c8c8c8;--muted:#9a9a9a;--accent:#FF6347;--link:#09A3F6;
+--gutter:2rem;--top:4.5rem;--sec:7rem;--block:1.75rem;--pad-lg:2.5rem;
+font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-weight:600;font-size:1rem;line-height:1.5;color:var(--ink);background:var(--bg);-webkit-font-smoothing:antialiased}
+.wrap{max-width:72rem;margin:0 auto;padding-left:var(--gutter);padding-right:var(--gutter)}
+:where(a,button):focus-visible{outline:2px solid var(--link);outline-offset:2px}
+.wordmark{font-weight:700;font-size:1.375rem;letter-spacing:-.02em}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;height:3rem;padding:0 1.5rem;border-radius:99999px;border:1px solid var(--line3);background:transparent;color:var(--ink);font-weight:700;font-size:1rem;white-space:nowrap;cursor:pointer;transition:background-color 150ms ease-out,transform 100ms ease-out}
+.btn:hover{background:var(--raise);color:#fff}
 .btn:active{transform:scale(.97)}
-.btn.pri{background:#3d8bff;border-color:#3d8bff;color:#fff}
-.btn.pri:hover{background:#5a9dff;border-color:#5a9dff}
-.btn.lg{min-height:3.25rem;padding:0 1.75rem;font-size:.875rem}
-.unit{background:#181e26;border:1px solid rgba(255,255,255,.12);border-radius:8px;overflow:hidden}
+.btn.acc{background:var(--accent);border-color:var(--accent);color:var(--bg)}
+.btn.acc:hover{background:#ff7a62;border-color:#ff7a62;color:var(--bg)}
+.u{background:var(--unit);border:1px solid var(--line2);border-top:3px solid var(--accent)}
+.uh{display:flex;align-items:center;gap:.625rem;height:2.75rem;padding:0 1rem;background:var(--unit-head);border-bottom:1px solid rgba(255,255,255,.1)}
+.uh b{font-weight:700;font-size:1rem}
+.uh .st{font-size:.75rem;color:var(--accent);font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--link);flex:none}
 .card{padding:var(--pad-lg);display:flex;flex-direction:column;gap:1.25rem}
-.soon{display:inline-flex;align-self:flex-start;align-items:center;gap:.5rem;font:600 .6875rem/1 Inter,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:#09A3F6}
-.soon i{width:7px;height:7px;border-radius:50%;background:#09A3F6;display:block}
-.p{margin:0;font-size:1rem;line-height:1.65;color:#c4ccd8}
-.back{display:inline-flex;align-items:center;gap:.375rem;font:600 .8125rem/1 Inter,sans-serif;color:#c4ccd8;padding:.75rem .25rem;transition:color 150ms ease-out}
+.p{margin:0;font-size:1.0625rem;font-weight:500;line-height:1.6;color:var(--ink2)}
+.back{display:inline-flex;align-items:center;gap:.375rem;font-size:.875rem;font-weight:600;color:var(--ink2);padding:.75rem .25rem;transition:color 150ms ease-out}
 .back:hover{color:#fff}
 .foot{display:flex;flex-wrap:wrap;align-items:center;gap:1.5rem;padding-top:2rem;padding-bottom:2rem}
 @media (max-width:860px){.site{--gutter:1.25rem;--top:2.5rem;--sec:4.5rem;--block:1.5rem;--pad-lg:1.5rem}.foot{flex-direction:column;align-items:flex-start;gap:.75rem}.acts .btn{flex:1 1 100%}}
 @media (prefers-reduced-motion:reduce){.btn:active{transform:none}}
-@media (prefers-contrast:more){.unit{border-color:rgba(255,255,255,.45)}.p{color:#e3e8ef}}
+@media (prefers-contrast:more){.u{border-color:rgba(255,255,255,.45)}.p{color:#e8e8e8}}
 </style>
 <style>html{scroll-behavior:smooth;scroll-padding-top:72px}@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}</style>
 </head>
 <body>
-<div class="site" style="min-height: 100vh; background: #11151b; color: #eef1f6; font-family: Inter, 'Helvetica Neue', sans-serif; display: flex; flex-direction: column">
+<div class="site" style="min-height: 100vh; display: flex; flex-direction: column">
 
-<header style="background: #161b22; border-bottom: 1px solid rgba(255,255,255,.08)">
-<div class="wrap" style="display: flex; align-items: center; gap: 1.5rem; height: 4rem">
-<a href="/" style="font-weight: 700; font-size: 1.375rem; letter-spacing: .14em" aria-label="TORE home">TORE</a>
+<header style="background: var(--panel); border-bottom: 1px solid var(--line)">
+<div class="wrap" style="display: flex; align-items: center; gap: 1.5rem; height: 3.75rem">
+<a href="/" class="wordmark" aria-label="TORE home">TORE</a>
 <span style="flex: 1"></span>
 <a class="back" href="/"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M10 3L5 8l5 5"></path></svg>Back to TORE</a>
 </div>
 </header>
 
 <main class="wrap" style="flex: 1; width: 100%; display: flex; justify-content: center; padding-top: var(--top); padding-bottom: var(--sec)">
-<div style="width: 100%; max-width: 35rem; display: flex; flex-direction: column; gap: var(--block)">
-<div class="unit card" style="border-top: 3px solid #09A3F6">
-<span class="soon"><i></i>Pre-alpha</span>
-<h1 style="margin: 0; font-size: clamp(1.875rem, 4vw, 2.5rem); line-height: 1.1; font-weight: 800; letter-spacing: -.03em">TORE isn't on sale yet.</h1>
+<div style="width: 100%; max-width: 36rem; display: flex; flex-direction: column; gap: var(--block)">
+<section class="u" aria-labelledby="t">
+<div class="uh"><span class="dot"></span><b>Availability</b><span style="flex: 1"></span><span class="st">Pre-alpha</span></div>
+<div class="card">
+<h1 id="t" style="margin: 0; font-size: clamp(1.875rem, 4vw, 2.5rem); line-height: 1.08; font-weight: 700; letter-spacing: -.03em">TORE isn't on sale yet.</h1>
 <p class="p">TORE is still in pre-alpha. It works, but it isn't ready for a public release, so it can't be bought yet.</p>
 <p class="p">Email us and we'll let you know as soon as it's available.</p>
 <div class="acts" style="display: flex; flex-wrap: wrap; gap: .75rem; margin-top: .25rem">
-<a class="btn pri lg" href="mailto:support@toreaudio.com?subject=Let%20me%20know%20when%20TORE%20is%20available">Get notified</a>
-<a class="btn lg" href="/#features">See the features</a>
+<a class="btn acc" href="mailto:support@toreaudio.com?subject=Let%20me%20know%20when%20TORE%20is%20available">Get notified</a>
+<a class="btn" href="/#features">See the features</a>
 </div>
 </div>
-<p style="margin: 0; text-align: center; font-size: .8125rem; line-height: 1.6; color: #97a1b0">TORE will run on Macs with Apple Silicon (M1 or later). Questions? <a href="mailto:support@toreaudio.com" style="color: #c4ccd8; text-decoration: underline">support@toreaudio.com</a></p>
+</section>
+<p style="margin: 0; text-align: center; font-size: .875rem; font-weight: 500; line-height: 1.6; color: var(--muted)">TORE will run on Macs with Apple Silicon (M1 or later). Questions? <a href="mailto:support@toreaudio.com" style="color: var(--ink2); text-decoration: underline">support@toreaudio.com</a></p>
 </div>
 </main>
 
-<footer style="border-top: 1px solid rgba(255,255,255,.08); background: #0d1015">
+<footer style="border-top: 1px solid var(--line); background: var(--panel)">
 <div class="wrap foot">
-<span style="font-weight: 700; font-size: 1.125rem; letter-spacing: .14em">TORE</span>
-<span style="font-size: .8125rem; color: #97a1b0">© 2026 Tore Audio. All rights reserved.</span>
+<span class="wordmark" style="font-size: 1.125rem">TORE</span>
+<span style="font-size: .8125rem; font-weight: 500; color: var(--muted)">© 2026 Tore Audio. All rights reserved.</span>
 </div>
 </footer>
 </div>

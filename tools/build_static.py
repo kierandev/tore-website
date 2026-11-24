@@ -42,10 +42,9 @@ def head(title, desc, canonical, helmet):
 <meta property="og:description" content="{desc}">
 <meta property="og:url" content="{canonical}">
 <meta property="og:type" content="website">
-<meta name="theme-color" content="#11151b">
+<meta name="theme-color" content="#161616">
 <link rel="canonical" href="{canonical}">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 {helmet}
 <style>html{{scroll-behavior:smooth;scroll-padding-top:72px}}@media (prefers-reduced-motion:reduce){{html{{scroll-behavior:auto}}}}</style>
 </head>
@@ -62,8 +61,8 @@ def expand(m):
 body = re.sub(r'<sc-for list="\{\{(\w+)\}\}" as="b" hint-placeholder-count="\d+">(.*?)</sc-for>', expand, body, flags=re.S)
 
 colors = ['#ff4d6d', '#ff8a3d', '#ffd23d', '#59d36b', '#38d6e8', '#3d8bff', '#9b6bff', '#ff5fd2']
-pads = ''.join('<button type="button" class="pad" style="--c: %s; %s" aria-label="Hot cue %d" data-pad>%d</button>' % (
-    c, ('background: %s; color: #11151b' % c) if i < 3 else 'box-shadow: inset 0 -2px 0 %s' % c, i + 1, i + 1) for i, c in enumerate(colors))
+pads = ''.join('<button type="button" class="pad%s" style="--c: %s" aria-label="Hot cue %d" data-pad>%d</button>' % (
+    ' set' if i < 3 else '', c, i + 1, i + 1) for i, c in enumerate(colors))
 body = re.sub(r'<sc-for list="\{\{pads\}\}".*?</sc-for>', pads, body, flags=re.S)
 
 rep = [
